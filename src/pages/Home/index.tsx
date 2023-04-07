@@ -1,11 +1,13 @@
-import { FormContainer, HomeContainer } from "./styles";
+
+import { Form } from "./components/Form";
+import { Post } from "./components/Post";
+import { HomeContainer } from "./styles";
 
 export function Home() {
-  return(
+  return (
     <HomeContainer>
-      <FormContainer>
-        
-      </FormContainer>
+      <Form/>
+      <Post/>
     </HomeContainer>
-  )
+  );
 }
