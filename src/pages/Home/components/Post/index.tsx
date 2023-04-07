@@ -1,6 +1,6 @@
 import {
   ButtonWrapper,
-  PostAuthor,
+  DialogTrigger,
   PostContainer,
   PostContent,
   PostHeader,
@@ -8,6 +8,9 @@ import {
 } from "./styles";
 import { TbTrashXFilled } from "react-icons/tb";
 import { FaRegEdit } from "react-icons/fa";
+import { EditModal } from "../../../../components/EditModal";
+import * as Dialog from "@radix-ui/react-dialog";
+import { DeleteModal } from "../../../../components/DeleteModal";
 
 export function Post() {
   return (
@@ -16,13 +19,21 @@ export function Post() {
         <PostTitle>My First Post at CodeLeap Network</PostTitle>
 
         <ButtonWrapper>
-          <button>
-            <TbTrashXFilled />
-          </button>
+          <Dialog.Root>
+            <DialogTrigger>
+              <TbTrashXFilled />
+            </DialogTrigger>
 
-          <button>
-            <FaRegEdit />
-          </button>
+            <DeleteModal />
+          </Dialog.Root>
+
+          <Dialog.Root>
+            <DialogTrigger>
+              <FaRegEdit />
+            </DialogTrigger>
+
+            <EditModal />
+          </Dialog.Root>
         </ButtonWrapper>
       </PostHeader>
 

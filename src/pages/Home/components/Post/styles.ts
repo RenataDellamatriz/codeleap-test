@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as Dialog from "@radix-ui/react-dialog";
 
 export const PostContainer = styled.div`
   width: 100%;
@@ -35,7 +36,7 @@ export const PostContent = styled.section`
 
   p {
     margin-top: 16px;
-    font-size:1.125rem;
+    font-size: 1.125rem;
   }
 `;
 
@@ -45,15 +46,21 @@ export const PostTitle = styled.h3`
   color: ${(props) => props.theme.white};
 `;
 
+
 export const ButtonWrapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 20px;
+`
+export const DialogTrigger = styled(Dialog.Trigger)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  button {
-    border: none;
-    background-color: transparent;
-  }
+
+  border: none;
+  background-color: transparent;
+
   svg {
     font-size: 1.375rem;
     color: ${(props) => props.theme.white};
