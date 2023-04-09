@@ -14,6 +14,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { DeleteModal } from "../../../../components/DeleteModal";
 import { PostProps } from "../../../../store/slices/posts";
 import { PostAuthor } from "./styles";
+import { useState } from "react";
 
 
 
@@ -25,26 +26,29 @@ export function Post({
   id
 }: PostProps) {
 
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   return (
     <PostContainer>
       <PostHeader>
         <PostTitle>{title}</PostTitle>
 
         <ButtonWrapper>
-          <Dialog.Root>
+          <Dialog.Root open={openDeleteModal} onOpenChange={setOpenDeleteModal}>
             <DialogTrigger>
               <TbTrashXFilled />
             </DialogTrigger>
 
-            <DeleteModal />
+            <DeleteModal id={id} onCloseModal={() => setOpenEditModal(false)}/>
           </Dialog.Root>
 
-          <Dialog.Root>
+          <Dialog.Root open={openEditModal} onOpenChange={setOpenEditModal}>
             <DialogTrigger>
               <FaRegEdit />
             </DialogTrigger>
 
-            <EditModal id={id} />
+            <EditModal id={id} onCloseModal={() => setOpenEditModal(false)} />
           </Dialog.Root>
         </ButtonWrapper>
       </PostHeader>

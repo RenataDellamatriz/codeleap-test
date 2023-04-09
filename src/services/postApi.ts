@@ -6,7 +6,7 @@ const fetchAllPosts = async () => {
     const response = await axios.get("https://dev.codeleap.co.uk/careers/");
     return response.data.results as PostProps;
   } catch (error) {
-    console.log(error);
+    throw new Error
   }
 };
 
@@ -44,10 +44,10 @@ const updatePost = async (data: PostUpdateInput) => {
   }
 };
 
-const deletePost = async (post: PostProps) => {
+const deletePost = async (id: number) => {
   try {
     const res = await axios.delete(
-      `https://dev.codeleap.co.uk/careers/${post.id}/`
+      `https://dev.codeleap.co.uk/careers/${id}/`, {}
     );
     return res.data;
   } catch (error) {

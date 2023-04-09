@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { PostProps, updatePost } from "../../store/slices/posts";
 import { useSelector } from "react-redux";
+import { postApi } from "../../services/postApi";
 
 const editPostSchema = z.object({
   title: z.string(),
@@ -19,7 +20,14 @@ const editPostSchema = z.object({
 
 type editPostFormSchema = z.infer<typeof editPostSchema>;
 
-export function EditModal({ id }: { id: number }) {
+interface EditModalProps {
+  id: number;
+  onCloseModal: () => void;
+}
+
+export function EditModal(
+  {id, onCloseModal} : EditModalProps
+) {
   const dispatch = useAppDispatch();
 
   const {
@@ -37,8 +45,8 @@ export function EditModal({ id }: { id: number }) {
       content: content,
       id: id,
     };
-    (await dispatch(updatePost(editPost))) && reset();
-    console.log(editPost);
+    (await dispatch(updatePost(editPost))) && reset();     
+    onCloseModal()
   }
 
   return (

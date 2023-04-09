@@ -1,7 +1,24 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ButtonWrapper, DialogContent, DialogOverlay, DialogTitle } from "./styles";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { deletePost } from "../../store/slices/posts";
+import { postApi } from "../../services/postApi";
 
-export function DeleteModal() {
+interface DeleteModal {
+  id: number
+  onCloseModal: () => void;
+}
+
+export function DeleteModal({id, onCloseModal} : DeleteModal) {
+  const dispatch = useAppDispatch();
+  
+
+  async function onDeletePost() {       
+    await dispatch(deletePost(id)) 
+    await postApi.fetchAllPosts()
+    onCloseModal()      
+  }
+
   return (
     <Dialog.Portal>
       <DialogOverlay />
@@ -10,7 +27,7 @@ export function DeleteModal() {
 
         <ButtonWrapper>
           <Dialog.Close>Cancel</Dialog.Close>
-          <button>Delete</button>
+          <button onClick={() => onDeletePost}>Delete</button>
         </ButtonWrapper>
       </DialogContent>
     </Dialog.Portal>

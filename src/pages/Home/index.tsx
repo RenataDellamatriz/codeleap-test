@@ -12,7 +12,9 @@ export function Home() {
   useEffect(() => {
     async function getData() {
       const post = await postApi.fetchAllPosts();
-      setPosts(post);
+      if (post) {
+        setPosts(post);
+      }
     }
     getData();
   }, []);
@@ -26,7 +28,7 @@ export function Home() {
             key={post.id}
             id={post.id}
             content={post.content}
-            created_datetime={formatDistanceToNow(
+            created_datetime={post.created_datetime && formatDistanceToNow(
               new Date(post.created_datetime),
               {
                 addSuffix: true,
