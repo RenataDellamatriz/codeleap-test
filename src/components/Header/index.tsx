@@ -7,42 +7,46 @@ import {
 } from "./styles";
 import { LoginModal } from "../LoginModal";
 import { useState } from "react";
-import { MdLogin } from "react-icons/md";
+import { MdLogin, MdLogout } from "react-icons/md";
 import { selectedUser } from "../../store/slices/user";
 import { useSelector } from "react-redux";
-
+import { LogoutModal } from "../LogoutModal";
 
 export function Header() {
   const username = useSelector(selectedUser);
-  const [open, setOpen] = useState(false);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openLogoutModal, setOpenLogoutModal] = useState(false)
 
-  function closeModal() {
-    setOpen(false);
-  }
-
+ 
   return (
     <HeaderContainer>
       <Title>CodeLeap Network</Title>
-      <Dialog.Root open={open} onOpenChange={setOpen}>
-        <TriggerWrapper>
-          {username.user && (
-            <span>
-              Hello,<strong> {username.user}</strong>!
-            </span>
-          )}
-          <DialogTrigger>
-            {username.user ? (
-              <MdLogin />
-            ) : (
-              <>
-                <span>login</span> <MdLogin />
-              </>
+      {username.user ? (
+        <Dialog.Root open={openLogoutModal} onOpenChange={setOpenLogoutModal}>
+          <TriggerWrapper>
+            {username.user && (
+              <span>
+                Hello,<strong> {username.user}</strong>!
+              </span>
             )}
-          </DialogTrigger>
-        </TriggerWrapper>
+            <DialogTrigger>
+              <MdLogout />
+            </DialogTrigger>
+          </TriggerWrapper>
 
-        <LoginModal onCloseModal={closeModal} />
-      </Dialog.Root>
+          <LogoutModal onCloseModal={() => setOpenLogoutModal(false)}/>
+        </Dialog.Root>
+      ) : (
+        <>
+          <Dialog.Root open={openLoginModal} onOpenChange={setOpenLoginModal}>
+            <DialogTrigger>
+              <span>login</span> <MdLogin />
+            </DialogTrigger>
+
+            <LoginModal onCloseModal={() => setOpenLoginModal(false)} />          
+          </Dialog.Root>
+        </>
+      )}
     </HeaderContainer>
   );
 }

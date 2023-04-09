@@ -45,7 +45,8 @@ const updatePost = createAsyncThunk(
 const deletePost = createAsyncThunk(
   `posts/deletePost`,
   async (post: PostProps) => {
-     await postApi.deletePost(post);    
+  const res =   await postApi.deletePost(post);
+  return res
   }
 );
 
@@ -70,13 +71,11 @@ export const postsSlice = createSlice({
           selectedPost.content = content;
         }
       })
-      // .addCase(deletePost.fulfilled, (state, action) => {
-      //   const filteredPosts = state.posts.filter(
-      //     (post) => post.id !== action.payload.posts.id
-      //   );
-
-      //   state.posts = filteredPosts
-      // });
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts = state.posts.filter(
+          ({ id }) => id !== action.payload
+        );
+      });
   },
 });
 

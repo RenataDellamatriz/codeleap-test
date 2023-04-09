@@ -4,7 +4,7 @@ import { PostInput, PostProps } from "../store/slices/posts";
 const fetchAllPosts = async () => {
   try {
     const response = await axios.get("https://dev.codeleap.co.uk/careers/");
-    return response.data.results;
+    return response.data.results as PostProps;
   } catch (error) {
     console.log(error);
   }
@@ -36,7 +36,8 @@ const updatePost = async (post: PostProps) => {
 
 const deletePost =  async (post : PostProps) => {
   try {
-    await axios.delete(`https://dev.codeleap.co.uk/careers/${post.id}`)    
+    const res = await axios.delete(`https://dev.codeleap.co.uk/careers/${post.id}`) 
+    return res.data   
   }catch(error) {
     console.log(error)
   }
