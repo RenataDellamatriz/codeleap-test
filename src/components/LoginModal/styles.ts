@@ -9,7 +9,8 @@ export const DialogOverlay = styled(Dialog.Overlay)`
   background: ${(props) => props.theme["base-background"]};
 `;
 export const DialogContent = styled(Dialog.Content)`
-  min-width: 32rem;
+  max-width: 32rem;
+  width:100%;
   border-radius: 6px;
   padding: 24px;
   background: ${(props) => props.theme.white};

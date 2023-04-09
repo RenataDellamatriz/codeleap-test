@@ -5,11 +5,14 @@ import { Home } from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { DefaultLayout } from "./layouts/DefaultLayout";
+import { store } from "./store"; 
+import { Provider } from 'react-redux'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
+      <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
@@ -17,6 +20,7 @@ export function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 }

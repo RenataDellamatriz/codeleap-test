@@ -11,12 +11,16 @@ import { FaRegEdit } from "react-icons/fa";
 import { EditModal } from "../../../../components/EditModal";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DeleteModal } from "../../../../components/DeleteModal";
+import { useEffect, useState } from "react";
+import { postApi } from "../../../../services/postApi";
+import { PostProps } from "../../../../store/slices/posts";
 
-export function Post() {
+export function Post({ title, username, created_datetime, content }: PostProps) {
+  
   return (
     <PostContainer>
       <PostHeader>
-        <PostTitle>My First Post at CodeLeap Network</PostTitle>
+        <PostTitle>{title}</PostTitle>
 
         <ButtonWrapper>
           <Dialog.Root>
@@ -39,19 +43,11 @@ export function Post() {
 
       <PostContent>
         <div>
-          <span>@Vitor</span>
-          <span>25 minutes ago</span>
+          <span>@{username}</span>
+          <span>{created_datetime}</span>
         </div>
 
-        <p>
-          Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum
-          elit. Pellentesque habitant morbi tristique senectus et netus et
-          malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula
-          mattis placerat. Duis vel nibh at velit scelerisque suscipit. Duis
-          lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus
-          feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis
-          lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat.
-        </p>
+        <p>{content}</p>
       </PostContent>
     </PostContainer>
   );

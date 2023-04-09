@@ -13,6 +13,20 @@ export const Title = styled.h1`
   font-size: 1.375rem;
   color: ${(props) => props.theme.white};
 `;
+
+export const TriggerWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  color: ${(props) => props.theme.white};
+
+  strong {
+    color: ${(props) => props.theme.white};
+    text-transform: capitalize;
+  }
+`;
+
 export const DialogTrigger = styled(Dialog.Trigger)`
   display: flex;
   justify-content: center;
@@ -21,7 +35,7 @@ export const DialogTrigger = styled(Dialog.Trigger)`
   background-color: transparent;
   color: ${(props) => props.theme.white};
   font-size: 1rem;
-  font-weight: 700;
+
   border: none;
   cursor: pointer;
 
