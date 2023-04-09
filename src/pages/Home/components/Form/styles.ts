@@ -49,4 +49,7 @@ export const FormButton = styled.button`
   width: 7.5rem;
   padding: 0.4rem;
   cursor: pointer;
+  :disabled {
+    cursor: not-allowed;
+  }
 `;

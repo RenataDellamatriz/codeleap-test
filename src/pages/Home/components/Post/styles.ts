@@ -44,6 +44,8 @@ export const PostTitle = styled.h3`
   font-weight: 700;
   font-size: 1.375rem;
   color: ${(props) => props.theme.white};
+  inline-size: 70%;
+  overflow-wrap: break-word;
 `;
 
 
@@ -60,6 +62,7 @@ export const DialogTrigger = styled(Dialog.Trigger)`
 
   border: none;
   background-color: transparent;
+  cursor: pointer;
 
   svg {
     font-size: 1.375rem;
@@ -67,6 +70,8 @@ export const DialogTrigger = styled(Dialog.Trigger)`
   }
 `;
 
-export const PostAuthor = styled.span``;
+export const PostAuthor = styled.span`
+text-transform: capitalize;
+`;
 
 export const PostDate = styled.span``;

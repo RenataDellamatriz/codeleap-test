@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PostInput, PostProps } from "../store/slices/posts";
+import { PostInput, PostProps, PostUpdateInput } from "../store/slices/posts";
 
 const fetchAllPosts = async () => {
   try {
@@ -10,42 +10,54 @@ const fetchAllPosts = async () => {
   }
 };
 
-const createPost = async (postInput: PostInput) => {
+const createPost = async ({ content, title, username }: PostInput) => {
+  const newPost = {
+    username: username,
+    title: title,
+    content: content,
+  };
   try {
-    const response = await axios.post(
+    const res = await axios.post(
       `https://dev.codeleap.co.uk/careers/`,
-      postInput
+      newPost
     );
-    return response.data.results as PostProps;
+    return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const updatePost = async (post: PostProps) => {
+const updatePost = async (data: PostUpdateInput) => {
+  const body = {
+    title: data.title,
+    content: data.content,
+  };
+
   try {
     const res = await axios.patch(
-      `https://dev.codeleap.co.uk/careers/${post.id}`,
-      { content: post.content, title: post.title }
+      `https://dev.codeleap.co.uk/careers/${data.id}`,
+      body
     );
-    return res.data.results;
+    return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const deletePost =  async (post : PostProps) => {
+const deletePost = async (post: PostProps) => {
   try {
-    const res = await axios.delete(`https://dev.codeleap.co.uk/careers/${post.id}`) 
-    return res.data   
-  }catch(error) {
-    console.log(error)
+    const res = await axios.delete(
+      `https://dev.codeleap.co.uk/careers/${post.id}`
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 export const postApi = {
   fetchAllPosts,
   createPost,
   updatePost,
-  deletePost
+  deletePost,
 };

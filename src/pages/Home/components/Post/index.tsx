@@ -3,6 +3,7 @@ import {
   DialogTrigger,
   PostContainer,
   PostContent,
+  PostDate,
   PostHeader,
   PostTitle,
 } from "./styles";
@@ -11,12 +12,18 @@ import { FaRegEdit } from "react-icons/fa";
 import { EditModal } from "../../../../components/EditModal";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DeleteModal } from "../../../../components/DeleteModal";
-import { useEffect, useState } from "react";
-import { postApi } from "../../../../services/postApi";
 import { PostProps } from "../../../../store/slices/posts";
+import { PostAuthor } from "./styles";
 
-export function Post({ title, username, created_datetime, content }: PostProps) {
-  
+
+
+export function Post({
+  title,
+  username,
+  created_datetime,
+  content,
+}: PostProps) {
+
   return (
     <PostContainer>
       <PostHeader>
@@ -43,8 +50,8 @@ export function Post({ title, username, created_datetime, content }: PostProps) 
 
       <PostContent>
         <div>
-          <span>@{username}</span>
-          <span>{created_datetime}</span>
+          <PostAuthor>@{username}</PostAuthor>
+          <PostDate>{created_datetime}</PostDate>
         </div>
 
         <p>{content}</p>

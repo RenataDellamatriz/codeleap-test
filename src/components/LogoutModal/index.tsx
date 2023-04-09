@@ -12,7 +12,8 @@ export function LogoutModal({ onCloseModal }: { onCloseModal: () => void }) {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(setUsername({ user: "" })) && onCloseModal()    
+    dispatch(setUsername({ user: "" })) && 
+    onCloseModal()    
   }
 
   return (

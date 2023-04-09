@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postApi } from "../../../services/postApi";
+import { User } from "../user";
 
 export interface PostProps {
   id: number;
@@ -15,6 +16,12 @@ export interface PostInput {
   username: string;
 }
 
+export interface PostUpdateInput {
+  title: string;
+  content: string;
+  id: number;
+}
+
 export interface PostsState {
   posts: PostProps[];
 }
@@ -23,20 +30,20 @@ const initialState: PostsState = {
   posts: [],
 };
 
-const createPost = createAsyncThunk(
+export const createPost = createAsyncThunk(
   `posts/createPost`,
-  async (postInput: PostInput) => {
-    const res = await postApi.createPost(postInput);
+  async ({ username, title, content }: PostInput) => {
+    const res = await postApi.createPost({ username, title, content });
     if (res) {
       return res;
     }
   }
 );
 
-const updatePost = createAsyncThunk(
+export const updatePost = createAsyncThunk(
   `posts/updatePost`,
-  async (post: PostProps) => {
-    const res = await postApi.updatePost(post);
+  async (data: PostUpdateInput) => {
+    const res = await postApi.updatePost(data);
 
     return res;
   }
@@ -45,8 +52,8 @@ const updatePost = createAsyncThunk(
 const deletePost = createAsyncThunk(
   `posts/deletePost`,
   async (post: PostProps) => {
-  const res =   await postApi.deletePost(post);
-  return res
+    const res = await postApi.deletePost(post);
+    return res;
   }
 );
 
@@ -72,13 +79,13 @@ export const postsSlice = createSlice({
         }
       })
       .addCase(deletePost.fulfilled, (state, action) => {
-        state.posts = state.posts.filter(
-          ({ id }) => id !== action.payload
-        );
+        state.posts = state.posts.filter(({ id }) => id !== action.payload);
       });
   },
 });
 
 export const { setPostsList } = postsSlice.actions;
+
+export const create = createPost;
 
 export default postsSlice.reducer;

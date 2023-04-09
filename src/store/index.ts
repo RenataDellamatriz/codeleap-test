@@ -7,7 +7,6 @@ import { persistReducer, persistStore } from "redux-persist";
 const persistConfig = {
   key: "user",
   storage,
-  blacklist:['isLoggedin']
 };
 
 const persistedUser = persistReducer(persistConfig, userSlice);
@@ -17,9 +16,13 @@ export const store = configureStore({
     user: persistedUser,
     posts: postsSlice,
   },
+  middleware: getDefaultMiddleware =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 
