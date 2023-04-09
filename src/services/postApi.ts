@@ -35,7 +35,7 @@ const updatePost = async (data: PostUpdateInput) => {
 
   try {
     const res = await axios.patch(
-      `https://dev.codeleap.co.uk/careers/${data.id}`,
+      `https://dev.codeleap.co.uk/careers/${data.id}/`,
       body
     );
     return res.data;
@@ -47,7 +47,7 @@ const updatePost = async (data: PostUpdateInput) => {
 const deletePost = async (post: PostProps) => {
   try {
     const res = await axios.delete(
-      `https://dev.codeleap.co.uk/careers/${post.id}`
+      `https://dev.codeleap.co.uk/careers/${post.id}/`
     );
     return res.data;
   } catch (error) {

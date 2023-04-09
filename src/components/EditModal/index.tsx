@@ -9,31 +9,38 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { updatePost } from "../../store/slices/posts";
+import { PostProps, updatePost } from "../../store/slices/posts";
+import { useSelector } from "react-redux";
 
 const editPostSchema = z.object({
   title: z.string(),
   content: z.string(),
-  id: z.number()
 });
 
 type editPostFormSchema = z.infer<typeof editPostSchema>;
 
-export function EditModal() {
+export function EditModal({ id }: { id: number }) {
   const dispatch = useAppDispatch();
 
-  const { handleSubmit, register, reset } = useForm<editPostFormSchema>({
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<editPostFormSchema>({
     resolver: zodResolver(editPostSchema),
   });
 
-  async function onEditSubmit({ title, content, id }: editPostFormSchema) {
+  async function onEditSubmit({ title, content }: editPostFormSchema) {
     const editPost = {
       title: title,
       content: content,
-      id
+      id: id,
     };
-    await dispatch(updatePost(editPost)) && reset()
+    (await dispatch(updatePost(editPost))) && reset();
+    console.log(editPost);
   }
+
   return (
     <Dialog.Portal>
       <DialogOverlay />

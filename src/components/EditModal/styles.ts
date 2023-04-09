@@ -7,6 +7,7 @@ export const DialogOverlay = styled(Dialog.Overlay)`
   height: 100vh;
   inset: 0;
   background: rgba(119, 119, 119, 0.8);
+  
 `;
 
 export const DialogContent = styled(Dialog.Content)`
@@ -20,6 +21,7 @@ export const DialogContent = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1000;
 
   input,
   textarea {

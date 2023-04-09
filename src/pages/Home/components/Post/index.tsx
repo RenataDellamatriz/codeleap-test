@@ -22,6 +22,7 @@ export function Post({
   username,
   created_datetime,
   content,
+  id
 }: PostProps) {
 
   return (
@@ -43,7 +44,7 @@ export function Post({
               <FaRegEdit />
             </DialogTrigger>
 
-            <EditModal />
+            <EditModal id={id} />
           </Dialog.Root>
         </ButtonWrapper>
       </PostHeader>
