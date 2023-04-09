@@ -1,16 +1,26 @@
-import { configureStore } from '@reduxjs/toolkit'
-import userSlice from './slices/user/index';
-import postsSlice from './slices/posts/index';
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./slices/user/index";
+import postsSlice from "./slices/posts/index";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
 
+const persistConfig = {
+  key: "user",
+  storage,
+  blacklist:['isLoggedin']
+};
+
+const persistedUser = persistReducer(persistConfig, userSlice);
 
 export const store = configureStore({
   reducer: {
-    user: userSlice,
-    posts: postsSlice
+    user: persistedUser,
+    posts: postsSlice,
   },
-})
+});
 
+export const persistor = persistStore(store)
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;

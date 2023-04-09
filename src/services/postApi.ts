@@ -1,8 +1,6 @@
 import axios from "axios";
 import { PostInput, PostProps } from "../store/slices/posts";
 
-//"https://dev.codeleap.co.uk/careers/"
-
 const fetchAllPosts = async () => {
   try {
     const response = await axios.get("https://dev.codeleap.co.uk/careers/");
