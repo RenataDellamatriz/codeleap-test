@@ -32,7 +32,7 @@ export function Header() {
           <TriggerWrapper>
             {user && (
               <span>
-                Hello,<strong> {user}</strong>!
+                Hello,<strong>{user}</strong>!
               </span>
             )}
             <DialogTrigger>

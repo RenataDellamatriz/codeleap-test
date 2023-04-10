@@ -33,6 +33,10 @@ export const DialogContent = styled(Dialog.Content)`
         gap: 8px;
       }
     }
+    span {
+    margin-top: 6px;
+    color: ${props => props.theme['base-delete']}
+  }
   }
 `;
 export const ButtonWrapper = styled.div`

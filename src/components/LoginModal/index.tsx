@@ -7,9 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { setUsername } from "../../store/slices/user";
 
-
 const userSchema = z.object({
-  username: z.string().min(1).max(30, "Maximum of 30 characters"),
+  username: z
+    .string()
+    .min(1, "*At least 1 character")
+    .max(30, "*At most 30 characters"),
 });
 
 type userFormSchema = z.infer<typeof userSchema>;
@@ -20,9 +22,10 @@ export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
   const {
     handleSubmit,
     register,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm<userFormSchema>({
     resolver: zodResolver(userSchema),
+    mode: "onChange",
   });
 
   function onUserSubmit({ username }: userFormSchema) {
@@ -44,6 +47,7 @@ export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
               placeholder="John Doe"
               {...register("username")}
             />
+            {errors.username && <span>{errors.username.message}</span>}
           </div>
           <ButtonWrapper>
             <button type="submit" disabled={!isValid}>

@@ -44,6 +44,11 @@ export const FieldsWrapper = styled.div`
     flex-direction: column;
     margin-top:1.5rem;
   }
+
+   span {
+    margin-top: 6px;
+    color: ${props => props.theme['base-delete']}
+  }
 `;
 export const ButtonWrapper = styled.div`
   width: 100%;

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.0.1",
     "@radix-ui/react-dialog": "^1.0.3",
     "@reduxjs/toolkit": "^1.9.3",

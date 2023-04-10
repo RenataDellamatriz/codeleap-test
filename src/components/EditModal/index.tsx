@@ -11,23 +11,25 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { updatePost } from "../../store/slices/posts";
 
-
-
 interface EditModalProps {
   id: number;
   onCloseModal: () => void;
 }
 
 const editPostSchema = z.object({
-  title: z.string(),
-  content: z.string(),
+  title: z
+    .string()
+    .min(1, "*At least 1 character")
+    .max(30, "*At most 30 characters"),
+  content: z
+    .string()
+    .min(1, "*At least 1 character")
+    .max(144, "*At most 144 characters"),
 });
 
 type editPostFormSchema = z.infer<typeof editPostSchema>;
 
-export function EditModal(
-  {id, onCloseModal} : EditModalProps
-) {
+export function EditModal({ id, onCloseModal }: EditModalProps) {
   const dispatch = useAppDispatch();
 
   const {
@@ -37,6 +39,7 @@ export function EditModal(
     formState: { errors },
   } = useForm<editPostFormSchema>({
     resolver: zodResolver(editPostSchema),
+    mode: "onChange"
   });
 
   async function onEditSubmit({ title, content }: editPostFormSchema) {
@@ -45,8 +48,8 @@ export function EditModal(
       content: content,
       id: id,
     };
-    (await dispatch(updatePost(editPost))) && reset();     
-    onCloseModal()
+    (await dispatch(updatePost(editPost))) && reset();
+    onCloseModal();
   }
 
   return (
@@ -64,10 +67,12 @@ export function EditModal(
                 placeholder="John Doe"
                 {...register("title")}
               />
+              {errors.title && <span>{errors.title.message}</span>}
             </div>
             <div>
               <label>Content</label>
               <textarea placeholder="Content here" {...register("content")} />
+              {errors.content && <span>{errors.content.message}</span>}
             </div>
           </FieldsWrapper>
 

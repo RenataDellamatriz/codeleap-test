@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+interface ButtonWrapperVariant {
+  variant : 'flexEnd' | 'spaceBetween'
+}
+
+const buttonWrapperVariant = {
+  space: {
+    flexEnd: 'flex-end',
+    spaceBetween: 'space-between'
+  }
+}
+
 export const FormContainer = styled.form`
   width: 100%;
   padding: 1.5rem;
@@ -7,7 +18,7 @@ export const FormContainer = styled.form`
   border-radius: 8px;
 `;
 
-export const FormTitle = styled.h1`
+export const FormTitle = styled.h2`
   font-weight: 700;
   font-size: 1.375rem;
 `;
@@ -16,7 +27,6 @@ export const FieldsWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-
   margin-top: 1.5rem;
 
   input,
@@ -31,12 +41,23 @@ export const FieldsWrapper = styled.div`
     height: 4.6rem;
     resize: none;
   }
+
+  span {
+    margin-top: 6px;
+    color: ${props => props.theme['base-delete']}
+  }
 `;
 
-export const FormButtonWrapper = styled.div`
+export const FormButtonWrapper = styled.div<ButtonWrapperVariant>`
   width: 100%; 
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${props => buttonWrapperVariant.space[props.variant]};
+  align-items: center;
+
+  span {
+    color : ${props  => props.theme['base-delete']};
+    margin-top: 6px;    
+  }
 `;
 
 export const FormButton = styled.button`
@@ -51,7 +72,7 @@ export const FormButton = styled.button`
   cursor: pointer;
   transition: 0.4s;
   :disabled {
-    cursor: not-allowed;
+    
     background-color: ${props => props.theme["base-placeholder"]};
   }
 `;

@@ -6,19 +6,23 @@ import {
   FormButtonWrapper,
   FormTitle,
 } from "./styles";
-
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
 import { selectedUser } from "../../../../store/slices/user";
 import { createPost } from "../../../../store/slices/posts";
-
+import { ErrorMessage } from "@hookform/error-message";
 
 const postSchema = z.object({
-  title: z.string().min(1),
-  content: z.string().min(1).max(144),    
+  title: z
+    .string()
+    .min(1, "*At least 1 character")
+    .max(30, "*At most 30 characters"),
+  content: z
+    .string()
+    .min(1, "*At least 1 character")
+    .max(144, "*At most 144 characters"),
 });
 
 type postFormSchema = z.infer<typeof postSchema>;
@@ -27,37 +31,54 @@ export function Form() {
   const { user } = useSelector(selectedUser);
   const dispatch = useAppDispatch();
 
-  const { handleSubmit, register, reset, formState } = useForm<postFormSchema>({
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<postFormSchema>({
     resolver: zodResolver(postSchema),
+    mode: "onChange",
   });
 
-
-
-  async function onPostSubmit({title, content}: postFormSchema) {
-   const newPost = {title: title, content: content, username: user}
-    await dispatch(createPost(newPost)) && reset()   
+  async function onPostSubmit({ title, content }: postFormSchema) {
+    const newPost = { title: title, content: content, username: user };
+    (await dispatch(createPost(newPost))) && reset();
   }
-
-  
 
   return (
     <FormContainer onSubmit={handleSubmit(onPostSubmit)}>
       <FormTitle> What's on your mind?</FormTitle>
       <FieldsWrapper>
         <label>Title</label>
-        <input placeholder="Hello world" {...register("title")} />
+        <input type="text" placeholder="Hello world" {...register("title")} />
+        {errors.title && <span>{errors.title.message}</span>}
       </FieldsWrapper>
 
       <FieldsWrapper>
         <label>Content</label>
-        <textarea placeholder="Content here" {...register("content")}/>
+        <textarea
+          placeholder="Content here"
+          {...register("content", { required: "Text required" })}
+        />
+        {errors.content && <span>{errors.content.message}</span>}
       </FieldsWrapper>
 
-      <FormButtonWrapper>
-        <FormButton type="submit" disabled={!user || !formState.isValid}>
-          Create
-        </FormButton>
-      </FormButtonWrapper>
+      {!user ? (
+        <FormButtonWrapper variant="spaceBetween" >
+          <span>*Login to post</span>
+          <FormButton type="submit" disabled={!user || !isValid}>
+            Create
+          </FormButton>
+        </FormButtonWrapper>
+      ) : (
+        <FormButtonWrapper variant='flexEnd'>
+          <FormButton type="submit" disabled={!user || !isValid}>
+            Create
+          </FormButton>
+        </FormButtonWrapper>
+      )}
+    
     </FormContainer>
   );
 }
