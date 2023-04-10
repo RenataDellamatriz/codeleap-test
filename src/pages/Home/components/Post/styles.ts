@@ -31,6 +31,10 @@ export const PostContent = styled.section`
     color: ${(props) => props.theme['base-span']};
     :nth-child(2) {
       font-weight: 400;
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+        text-align: right;
+      }
     }
   }
 

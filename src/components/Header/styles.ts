@@ -7,6 +7,9 @@ export const HeaderContainer = styled.header`
 
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 `
 export const Title = styled.h1`
   font-weight: 700;
@@ -24,6 +27,12 @@ export const TriggerWrapper = styled.div`
   strong {
     color: ${(props) => props.theme.white};
     text-transform: capitalize;
+  }
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    align-items: end;
+    gap: 6px;
   }
 `
 
