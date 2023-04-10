@@ -49,7 +49,7 @@ export function Post({
 
               <DeleteModal
                 id={id}
-                onCloseModal={() => setOpenEditModal(false)}
+                onCloseModal={() => setOpenDeleteModal(false)}
               />
             </Dialog.Root>
 

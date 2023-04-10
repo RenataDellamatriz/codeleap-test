@@ -19,8 +19,8 @@ export function DeleteModal({ id, onCloseModal }: DeleteModal) {
   const dispatch = useAppDispatch();
 
   async function onDeletePost() {
-    await dispatch(deletePost(id)) &&  onCloseModal()
-   
+    await dispatch(deletePost(id)) 
+     onCloseModal()     
   }
 
   return (

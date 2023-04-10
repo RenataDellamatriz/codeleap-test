@@ -4,7 +4,7 @@ import { PostInput, PostUpdateInput } from "../store/slices/posts";
 const fetchPosts = async (offset: number) => {
   const url = "https://dev.codeleap.co.uk/careers/";
   const query = {
-    limit : 5,
+    limit: 5,
     offset: offset,
   };
   try {
@@ -53,10 +53,8 @@ const updatePost = async (data: PostUpdateInput) => {
 
 const deletePost = async (id: number) => {
   try {
-    const res = await axios.delete(
-      `https://dev.codeleap.co.uk/careers/${id}/`,
-      {}
-    );
+    const res = await axios.delete(`https://dev.codeleap.co.uk/careers/${id}/`);
+   
     return res.data;
   } catch (error) {
     console.log(error);

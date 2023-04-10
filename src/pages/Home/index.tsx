@@ -21,6 +21,7 @@ export function Home() {
   useEffect(() => {
     async function getData() {
       const res = await postApi.fetchPosts(currentOffset);
+
       setLoadingPosts(true);
       setTimeout(() => {
         dispatch(setPostsList([...posts, ...res]));
@@ -43,8 +44,6 @@ export function Home() {
     return () => intersectionObserver.disconnect();
   }, []);
 
-  console.log(loadingPosts);
-  console.log(posts);
   return (
     <HomeContainer>
       <Form />

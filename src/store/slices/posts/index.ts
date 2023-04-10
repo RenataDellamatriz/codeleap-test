@@ -23,11 +23,11 @@ export interface PostUpdateInput {
 }
 
 export interface PostsState {
-  posts: PostProps[];  
+  posts: PostProps[];
 }
 
 const initialState: PostsState = {
-  posts: [],  
+  posts: [],
 };
 
 export const createPost = createAsyncThunk(
@@ -52,8 +52,9 @@ export const updatePost = createAsyncThunk(
 export const deletePost = createAsyncThunk(
   `posts/deletePost`,
   async (id: number) => {
-    const res = await postApi.deletePost(id);
-    return res.data;
+   await postApi.deletePost(id);
+
+    return id
   }
 );
 
@@ -68,7 +69,7 @@ export const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createPost.fulfilled, (state, action) => {
-        state.posts.push(action.payload as PostProps);
+        state.posts.unshift(action.payload as PostProps);
       })
       .addCase(updatePost.fulfilled, (state, action) => {
         const { id, title, content } = action.payload;
