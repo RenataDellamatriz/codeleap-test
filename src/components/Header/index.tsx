@@ -6,7 +6,7 @@ import {
   TriggerWrapper,
 } from "./styles";
 import { LoginModal } from "../LoginModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdLogin, MdLogout } from "react-icons/md";
 
 import { useSelector } from "react-redux";
@@ -14,20 +14,25 @@ import { LogoutModal } from "../LogoutModal";
 import { selectedUser } from "../../store/slices/user";
 
 export function Header() {
-  const username = useSelector(selectedUser);
+  const { user } = useSelector(selectedUser);
   const [openLoginModal, setOpenLoginModal] = useState(false);
-  const [openLogoutModal, setOpenLogoutModal] = useState(false)
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
 
- 
+  useEffect(() => {
+    if (!user) {
+      setOpenLoginModal(true);
+    }
+  }, []);
+
   return (
     <HeaderContainer>
       <Title>CodeLeap Network</Title>
-      {username.user ? (
+      {user ? (
         <Dialog.Root open={openLogoutModal} onOpenChange={setOpenLogoutModal}>
           <TriggerWrapper>
-            {username.user && (
+            {user && (
               <span>
-                Hello,<strong> {username.user}</strong>!
+                Hello,<strong> {user}</strong>!
               </span>
             )}
             <DialogTrigger>
@@ -35,7 +40,7 @@ export function Header() {
             </DialogTrigger>
           </TriggerWrapper>
 
-          <LogoutModal onCloseModal={() => setOpenLogoutModal(false)}/>
+          <LogoutModal onCloseModal={() => setOpenLogoutModal(false)} />
         </Dialog.Root>
       ) : (
         <>
@@ -44,7 +49,7 @@ export function Header() {
               <span>login</span> <MdLogin />
             </DialogTrigger>
 
-            <LoginModal onCloseModal={() => setOpenLoginModal(false)} />          
+            <LoginModal onCloseModal={() => setOpenLoginModal(false)} />
           </Dialog.Root>
         </>
       )}

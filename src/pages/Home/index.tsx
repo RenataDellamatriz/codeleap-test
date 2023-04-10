@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { Form } from "./components/Form";
 import { Post } from "./components/Post";
 import { HomeContainer, Sentinel } from "./styles";
-
 import { formatDistanceToNow } from "date-fns";
-
 import { useSelector } from "react-redux";
 import { postsState, setPostsList } from "../../store/slices/posts";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
