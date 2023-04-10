@@ -1,10 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ButtonWrapper, DialogContent, DialogOverlay } from "./styles";
-import { setUsername } from "../../store/slices/user";
+
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
+import { setUsername } from "../../store/slices/user";
+
 
 const userSchema = z.object({
   username: z.string().min(1).max(30, "Maximum of 30 characters"),

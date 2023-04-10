@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postApi } from "../../../services/postApi";
+import { RootState } from "../..";
 
 export interface PostProps {
   id: number;
@@ -22,11 +23,11 @@ export interface PostUpdateInput {
 }
 
 export interface PostsState {
-  posts: PostProps[];
+  posts: PostProps[];  
 }
 
 const initialState: PostsState = {
-  posts: [],
+  posts: [],  
 };
 
 export const createPost = createAsyncThunk(
@@ -50,7 +51,7 @@ export const updatePost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   `posts/deletePost`,
-  async (id : number) => {
+  async (id: number) => {
     const res = await postApi.deletePost(id);
     return res.data;
   }
@@ -84,5 +85,7 @@ export const postsSlice = createSlice({
 });
 
 export const { setPostsList } = postsSlice.actions;
+
+export const postsState = (state: RootState) => state.posts;
 
 export default postsSlice.reducer;

@@ -6,12 +6,15 @@ import {
   FormButtonWrapper,
   FormTitle,
 } from "./styles";
-import { selectedUser } from "../../../../store/slices/user";
+
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createPost } from "../../../../store/slices/posts";
+
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
+import { selectedUser } from "../../../../store/slices/user";
+import { createPost } from "../../../../store/slices/posts";
+
 
 const postSchema = z.object({
   title: z.string().min(1),

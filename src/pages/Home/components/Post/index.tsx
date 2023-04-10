@@ -12,11 +12,13 @@ import { FaRegEdit } from "react-icons/fa";
 import { EditModal } from "../../../../components/EditModal";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DeleteModal } from "../../../../components/DeleteModal";
-import { PostProps } from "../../../../store/slices/posts";
+
 import { PostAuthor } from "./styles";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectedUser } from "../../../../store/slices/user";
+import { PostProps } from "../../../../store/slices/posts";
+
 
 export function Post({
   title,

@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { deletePost } from "../../store/slices/posts";
 
 
+
 interface DeleteModal {
   id: number;
   onCloseModal: () => void;

@@ -5,7 +5,7 @@ import { Home } from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { DefaultLayout } from "./layouts/DefaultLayout";
-import { store, persistor } from "./store";
+import { store, persistor } from "./store"
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { useEffect, useState } from "react";

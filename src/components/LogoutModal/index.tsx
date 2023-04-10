@@ -8,6 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setUsername } from "../../store/slices/user";
 
+
 export function LogoutModal({ onCloseModal }: { onCloseModal: () => void }) {
   const dispatch = useDispatch();
 

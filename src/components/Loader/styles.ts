@@ -10,4 +10,9 @@ width: 100vw;
 height: 100vh;
 
 background-color: ${props => props.theme.white};
+img{
+  width: 80%;
+  max-width: 600px;
+  object-fit: contain;
+}
 `

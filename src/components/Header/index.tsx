@@ -8,9 +8,10 @@ import {
 import { LoginModal } from "../LoginModal";
 import { useState } from "react";
 import { MdLogin, MdLogout } from "react-icons/md";
-import { selectedUser } from "../../store/slices/user";
+
 import { useSelector } from "react-redux";
 import { LogoutModal } from "../LogoutModal";
+import { selectedUser } from "../../store/slices/user";
 
 export function Header() {
   const username = useSelector(selectedUser);

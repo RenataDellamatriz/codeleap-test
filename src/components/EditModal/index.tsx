@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { updatePost } from "../../store/slices/posts";
 
+
+
 interface EditModalProps {
   id: number;
   onCloseModal: () => void;

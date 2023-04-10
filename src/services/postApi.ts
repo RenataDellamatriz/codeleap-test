@@ -1,12 +1,19 @@
 import axios from "axios";
-import { PostInput, PostProps, PostUpdateInput } from "../store/slices/posts";
+import { PostInput, PostUpdateInput } from "../store/slices/posts";
 
-const fetchAllPosts = async () => {
+const fetchPosts = async (offset: number) => {
+  const url = "https://dev.codeleap.co.uk/careers/";
+  const query = {
+    limit : 5,
+    offset: offset,
+  };
   try {
-    const response = await axios.get("https://dev.codeleap.co.uk/careers/");
-    return response.data.results 
+    const response = await axios.get(url, {
+      params: query,
+    });
+    return response.data.results;
   } catch (error) {
-    throw new Error
+    throw new Error();
   }
 };
 
@@ -47,7 +54,8 @@ const updatePost = async (data: PostUpdateInput) => {
 const deletePost = async (id: number) => {
   try {
     const res = await axios.delete(
-      `https://dev.codeleap.co.uk/careers/${id}/`, {}
+      `https://dev.codeleap.co.uk/careers/${id}/`,
+      {}
     );
     return res.data;
   } catch (error) {
@@ -56,7 +64,7 @@ const deletePost = async (id: number) => {
 };
 
 export const postApi = {
-  fetchAllPosts,
+  fetchPosts,
   createPost,
   updatePost,
   deletePost,
