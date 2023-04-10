@@ -15,16 +15,17 @@ import { DeleteModal } from "../../../../components/DeleteModal";
 import { PostProps } from "../../../../store/slices/posts";
 import { PostAuthor } from "./styles";
 import { useState } from "react";
-
-
+import { useSelector } from "react-redux";
+import { selectedUser } from "../../../../store/slices/user";
 
 export function Post({
   title,
   username,
   created_datetime,
   content,
-  id
+  id,
 }: PostProps) {
+  const { user } = useSelector(selectedUser);
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -34,23 +35,31 @@ export function Post({
       <PostHeader>
         <PostTitle>{title}</PostTitle>
 
-        <ButtonWrapper>
-          <Dialog.Root open={openDeleteModal} onOpenChange={setOpenDeleteModal}>
-            <DialogTrigger>
-              <TbTrashXFilled />
-            </DialogTrigger>
+        {user == username && (
+          <ButtonWrapper>
+            <Dialog.Root
+              open={openDeleteModal}
+              onOpenChange={setOpenDeleteModal}
+            >
+              <DialogTrigger>
+                <TbTrashXFilled />
+              </DialogTrigger>
 
-            <DeleteModal id={id} onCloseModal={() => setOpenEditModal(false)}/>
-          </Dialog.Root>
+              <DeleteModal
+                id={id}
+                onCloseModal={() => setOpenEditModal(false)}
+              />
+            </Dialog.Root>
 
-          <Dialog.Root open={openEditModal} onOpenChange={setOpenEditModal}>
-            <DialogTrigger>
-              <FaRegEdit />
-            </DialogTrigger>
+            <Dialog.Root open={openEditModal} onOpenChange={setOpenEditModal}>
+              <DialogTrigger>
+                <FaRegEdit />
+              </DialogTrigger>
 
-            <EditModal id={id} onCloseModal={() => setOpenEditModal(false)} />
-          </Dialog.Root>
-        </ButtonWrapper>
+              <EditModal id={id} onCloseModal={() => setOpenEditModal(false)} />
+            </Dialog.Root>
+          </ButtonWrapper>
+        )}
       </PostHeader>
 
       <PostContent>

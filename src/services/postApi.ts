@@ -4,7 +4,7 @@ import { PostInput, PostProps, PostUpdateInput } from "../store/slices/posts";
 const fetchAllPosts = async () => {
   try {
     const response = await axios.get("https://dev.codeleap.co.uk/careers/");
-    return response.data.results as PostProps;
+    return response.data.results 
   } catch (error) {
     throw new Error
   }

@@ -12,12 +12,10 @@ export function Home() {
   useEffect(() => {
     async function getData() {
       const post = await postApi.fetchAllPosts();
-      if (post) {
-        setPosts(post);
-      }
+      post && setPosts(post);
     }
     getData();
-  }, []);
+  }, [posts]);
 
   return (
     <HomeContainer>
@@ -28,12 +26,12 @@ export function Home() {
             key={post.id}
             id={post.id}
             content={post.content}
-            created_datetime={post.created_datetime && formatDistanceToNow(
-              new Date(post.created_datetime),
-              {
+            created_datetime={
+              post.created_datetime &&
+              formatDistanceToNow(new Date(post.created_datetime), {
                 addSuffix: true,
-              }
-            )}
+              })
+            }
             username={post.username}
             title={post.title}
           />
