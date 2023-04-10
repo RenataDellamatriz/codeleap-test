@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import * as Dialog from "@radix-ui/react-dialog";
+import styled from 'styled-components'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const DialogOverlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -7,8 +7,7 @@ export const DialogOverlay = styled(Dialog.Overlay)`
   height: 100vh;
   inset: 0;
   background: rgba(119, 119, 119, 0.8);
-  
-`;
+`
 
 export const DialogContent = styled(Dialog.Content)`
   width: 50%;
@@ -25,7 +24,7 @@ export const DialogContent = styled(Dialog.Content)`
 
   input,
   textarea {
-    border: solid 1px ${(props) => props.theme["border-fields"]};
+    border: solid 1px ${(props) => props.theme['border-fields']};
     border-radius: 8px;
     padding: 8px;
     margin-top: 8px;
@@ -35,21 +34,21 @@ export const DialogContent = styled(Dialog.Content)`
     height: 4.6rem;
     resize: none;
   }
-`;
+`
 
 export const FieldsWrapper = styled.div`
   div {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top:1.5rem;
+    margin-top: 1.5rem;
   }
 
-   span {
+  span {
     margin-top: 6px;
-    color: ${props => props.theme['base-delete']}
+    color: ${(props) => props.theme['base-delete']};
   }
-`;
+`
 export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -62,17 +61,16 @@ export const ButtonWrapper = styled.div`
     padding: 0.4rem;
     width: 7.5rem;
     cursor: pointer;
-    
-    :nth-child(1){
-      background-color: ${props => props.theme.white};
+
+    :nth-child(1) {
+      background-color: ${(props) => props.theme.white};
       font-weight: 700;
-      border: solid 1px ${props =>props.theme.black};
+      border: solid 1px ${(props) => props.theme.black};
     }
     :nth-child(2) {
-      background-color: ${props => props.theme['base-success']};
-      color: ${props => props.theme.white};
+      background-color: ${(props) => props.theme['base-success']};
+      color: ${(props) => props.theme.white};
       border: none;
-      
     }
   }
-`;
+`

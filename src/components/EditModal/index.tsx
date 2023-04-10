@@ -1,36 +1,36 @@
-import * as Dialog from "@radix-ui/react-dialog";
+import * as Dialog from '@radix-ui/react-dialog'
 import {
   ButtonWrapper,
   DialogContent,
   DialogOverlay,
   FieldsWrapper,
-} from "./styles";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { updatePost } from "../../store/slices/posts";
+} from './styles'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { updatePost } from '../../store/slices/posts'
 
 interface EditModalProps {
-  id: number;
-  onCloseModal: () => void;
+  id: number
+  onCloseModal: () => void
 }
 
 const editPostSchema = z.object({
   title: z
     .string()
-    .min(1, "*At least 1 character")
-    .max(30, "*At most 30 characters"),
+    .min(1, '*At least 1 character')
+    .max(30, '*At most 30 characters'),
   content: z
     .string()
-    .min(1, "*At least 1 character")
-    .max(144, "*At most 144 characters"),
-});
+    .min(1, '*At least 1 character')
+    .max(144, '*At most 144 characters'),
+})
 
-type editPostFormSchema = z.infer<typeof editPostSchema>;
+type editPostFormSchema = z.infer<typeof editPostSchema>
 
 export function EditModal({ id, onCloseModal }: EditModalProps) {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const {
     handleSubmit,
@@ -39,17 +39,17 @@ export function EditModal({ id, onCloseModal }: EditModalProps) {
     formState: { errors },
   } = useForm<editPostFormSchema>({
     resolver: zodResolver(editPostSchema),
-    mode: "onChange"
-  });
+    mode: 'onChange',
+  })
 
   async function onEditSubmit({ title, content }: editPostFormSchema) {
     const editPost = {
-      title: title,
-      content: content,
-      id: id,
-    };
-    (await dispatch(updatePost(editPost))) && reset();
-    onCloseModal();
+      title,
+      content,
+      id,
+    }
+    ;(await dispatch(updatePost(editPost))) && reset()
+    onCloseModal()
   }
 
   return (
@@ -65,13 +65,13 @@ export function EditModal({ id, onCloseModal }: EditModalProps) {
               <input
                 type="text"
                 placeholder="John Doe"
-                {...register("title")}
+                {...register('title')}
               />
               {errors.title && <span>{errors.title.message}</span>}
             </div>
             <div>
               <label>Content</label>
-              <textarea placeholder="Content here" {...register("content")} />
+              <textarea placeholder="Content here" {...register('content')} />
               {errors.content && <span>{errors.content.message}</span>}
             </div>
           </FieldsWrapper>
@@ -83,5 +83,5 @@ export function EditModal({ id, onCloseModal }: EditModalProps) {
         </form>
       </DialogContent>
     </Dialog.Portal>
-  );
+  )
 }

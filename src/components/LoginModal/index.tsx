@@ -1,23 +1,23 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { ButtonWrapper, DialogContent, DialogOverlay } from "./styles";
+import * as Dialog from '@radix-ui/react-dialog'
+import { ButtonWrapper, DialogContent, DialogOverlay } from './styles'
 
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useDispatch } from "react-redux";
-import { setUsername } from "../../store/slices/user";
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useDispatch } from 'react-redux'
+import { setUsername } from '../../store/slices/user'
 
 const userSchema = z.object({
   username: z
     .string()
-    .min(1, "*At least 1 character")
-    .max(30, "*At most 30 characters"),
-});
+    .min(1, '*At least 1 character')
+    .max(30, '*At most 30 characters'),
+})
 
-type userFormSchema = z.infer<typeof userSchema>;
+type userFormSchema = z.infer<typeof userSchema>
 
 export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const {
     handleSubmit,
@@ -25,11 +25,11 @@ export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
     formState: { isValid, errors },
   } = useForm<userFormSchema>({
     resolver: zodResolver(userSchema),
-    mode: "onChange",
-  });
+    mode: 'onChange',
+  })
 
   function onUserSubmit({ username }: userFormSchema) {
-    dispatch(setUsername({ user: username })) && onCloseModal();
+    dispatch(setUsername({ user: username })) && onCloseModal()
   }
 
   return (
@@ -45,7 +45,7 @@ export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
             <input
               type="text"
               placeholder="John Doe"
-              {...register("username")}
+              {...register('username')}
             />
             {errors.username && <span>{errors.username.message}</span>}
           </div>
@@ -57,5 +57,5 @@ export function LoginModal({ onCloseModal }: { onCloseModal: () => void }) {
         </form>
       </DialogContent>
     </Dialog.Portal>
-  );
+  )
 }

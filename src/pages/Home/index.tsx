@@ -1,46 +1,47 @@
-import { useEffect, useState } from "react";
-import { Form } from "./components/Form";
-import { Post } from "./components/Post";
-import { HomeContainer, Sentinel } from "./styles";
-import { formatDistanceToNow } from "date-fns";
-import { useSelector } from "react-redux";
-import { postsState, setPostsList } from "../../store/slices/posts";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { postApi } from "../../services/postApi";
-import { ThreeDots } from "react-loader-spinner";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
+import { Form } from './components/Form'
+import { Post } from './components/Post'
+import { HomeContainer, Sentinel } from './styles'
+import { formatDistanceToNow } from 'date-fns'
+import { useSelector } from 'react-redux'
+import { postsState, setPostsList } from '../../store/slices/posts'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { postApi } from '../../services/postApi'
+import { ThreeDots } from 'react-loader-spinner'
 
 export function Home() {
-  const dispatch = useAppDispatch();
-  const { posts } = useSelector(postsState);
+  const dispatch = useAppDispatch()
+  const { posts } = useSelector(postsState)
 
-  const [currentOffset, setCurrentOffset] = useState(0);
-  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [currentOffset, setCurrentOffset] = useState(0)
+  const [loadingPosts, setLoadingPosts] = useState(false)
 
   useEffect(() => {
     async function getData() {
-      const res = await postApi.fetchPosts(currentOffset);
+      const res = await postApi.fetchPosts(currentOffset)
 
-      setLoadingPosts(true);
+      setLoadingPosts(true)
       setTimeout(() => {
-        dispatch(setPostsList([...posts, ...res]));
-        setLoadingPosts(false);
-      }, 1000 * 2);
+        dispatch(setPostsList([...posts, ...res]))
+        setLoadingPosts(false)
+      }, 1000 * 2)
     }
-    getData();
-  }, [currentOffset, dispatch]);
+    getData()
+  }, [currentOffset, dispatch])
 
   useEffect(() => {
-    const observer = document.querySelector("#observer");
+    const observer = document.querySelector('#observer')
     const intersectionObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
-        setCurrentOffset((state) => state + 5);
+        setCurrentOffset((state) => state + 5)
       }
-    });
+    })
 
-    observer && intersectionObserver.observe(observer);
+    observer && intersectionObserver.observe(observer)
 
-    return () => intersectionObserver.disconnect();
-  }, []);
+    return () => intersectionObserver.disconnect()
+  }, [])
 
   return (
     <HomeContainer>
@@ -61,7 +62,7 @@ export function Home() {
             username={post.username}
             title={post.title}
           />
-        );
+        )
       })}
       <Sentinel id="observer">
         {loadingPosts ? (
@@ -69,5 +70,5 @@ export function Home() {
         ) : null}
       </Sentinel>
     </HomeContainer>
-  );
+  )
 }

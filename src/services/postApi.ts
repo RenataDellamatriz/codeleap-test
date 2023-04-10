@@ -1,69 +1,66 @@
-import axios from "axios";
-import { PostInput, PostUpdateInput } from "../store/slices/posts";
+import axios from 'axios'
+import { PostInput, PostUpdateInput } from '../store/slices/posts'
 
 const fetchPosts = async (offset: number) => {
-  const url = "https://dev.codeleap.co.uk/careers/";
+  const url = 'https://dev.codeleap.co.uk/careers/'
   const query = {
     limit: 5,
-    offset: offset,
-  };
+    offset,
+  }
   try {
     const response = await axios.get(url, {
       params: query,
-    });
-    return response.data.results;
+    })
+    return response.data.results
   } catch (error) {
-    throw new Error();
+    throw new Error()
   }
-};
+}
 
 const createPost = async ({ content, title, username }: PostInput) => {
   const newPost = {
-    username: username,
-    title: title,
-    content: content,
-  };
-  try {
-    const res = await axios.post(
-      `https://dev.codeleap.co.uk/careers/`,
-      newPost
-    );
-    return res.data;
-  } catch (error) {
-    console.log(error);
+    username,
+    title,
+    content,
   }
-};
+  try {
+    const res = await axios.post(`https://dev.codeleap.co.uk/careers/`, newPost)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const updatePost = async (data: PostUpdateInput) => {
   const body = {
     title: data.title,
     content: data.content,
-  };
+  }
 
   try {
     const res = await axios.patch(
       `https://dev.codeleap.co.uk/careers/${data.id}/`,
-      body
-    );
-    return res.data;
+      body,
+    )
+    return res.data
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 const deletePost = async (id: number) => {
   try {
-    const res = await axios.delete(`https://dev.codeleap.co.uk/careers/${id}/`);
-   
-    return res.data;
+    const res = await axios.delete(`https://dev.codeleap.co.uk/careers/${id}/`)
+
+    return res.data
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
 
 export const postApi = {
   fetchPosts,
   createPost,
   updatePost,
   deletePost,
-};
+}

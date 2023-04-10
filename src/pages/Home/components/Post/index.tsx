@@ -6,38 +6,37 @@ import {
   PostDate,
   PostHeader,
   PostTitle,
-} from "./styles";
-import { TbTrashXFilled } from "react-icons/tb";
-import { FaRegEdit } from "react-icons/fa";
-import { EditModal } from "../../../../components/EditModal";
-import * as Dialog from "@radix-ui/react-dialog";
-import { DeleteModal } from "../../../../components/DeleteModal";
+  PostAuthor,
+} from './styles'
+import { TbTrashXFilled } from 'react-icons/tb'
+import { FaRegEdit } from 'react-icons/fa'
+import { EditModal } from '../../../../components/EditModal'
+import * as Dialog from '@radix-ui/react-dialog'
+import { DeleteModal } from '../../../../components/DeleteModal'
 
-import { PostAuthor } from "./styles";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectedUser } from "../../../../store/slices/user";
-import { PostProps } from "../../../../store/slices/posts";
-
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectedUser } from '../../../../store/slices/user'
+import { PostProps } from '../../../../store/slices/posts'
 
 export function Post({
   title,
   username,
-  created_datetime,
+  created_datetime: createdDateTime,
   content,
   id,
 }: PostProps) {
-  const { user } = useSelector(selectedUser);
+  const { user } = useSelector(selectedUser)
 
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false)
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   return (
     <PostContainer>
       <PostHeader>
         <PostTitle>{title}</PostTitle>
 
-        {user == username && (
+        {user === username && (
           <ButtonWrapper>
             <Dialog.Root
               open={openDeleteModal}
@@ -67,11 +66,11 @@ export function Post({
       <PostContent>
         <div>
           <PostAuthor>@{username}</PostAuthor>
-          <PostDate>{created_datetime}</PostDate>
+          <PostDate>{createdDateTime}</PostDate>
         </div>
 
         <p>{content}</p>
       </PostContent>
     </PostContainer>
-  );
+  )
 }

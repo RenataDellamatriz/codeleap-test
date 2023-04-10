@@ -1,28 +1,24 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import {
-  DialogTrigger,
-  HeaderContainer,
-  Title,
-  TriggerWrapper,
-} from "./styles";
-import { LoginModal } from "../LoginModal";
-import { useEffect, useState } from "react";
-import { MdLogin, MdLogout } from "react-icons/md";
+/* eslint-disable react-hooks/exhaustive-deps */
+import * as Dialog from '@radix-ui/react-dialog'
+import { DialogTrigger, HeaderContainer, Title, TriggerWrapper } from './styles'
+import { LoginModal } from '../LoginModal'
+import { useEffect, useState } from 'react'
+import { MdLogin, MdLogout } from 'react-icons/md'
 
-import { useSelector } from "react-redux";
-import { LogoutModal } from "../LogoutModal";
-import { selectedUser } from "../../store/slices/user";
+import { useSelector } from 'react-redux'
+import { LogoutModal } from '../LogoutModal'
+import { selectedUser } from '../../store/slices/user'
 
 export function Header() {
-  const { user } = useSelector(selectedUser);
-  const [openLoginModal, setOpenLoginModal] = useState(false);
-  const [openLogoutModal, setOpenLogoutModal] = useState(false);
+  const { user } = useSelector(selectedUser)
+  const [openLoginModal, setOpenLoginModal] = useState(false)
+  const [openLogoutModal, setOpenLogoutModal] = useState(false)
 
   useEffect(() => {
     if (!user) {
-      setOpenLoginModal(true);
+      setOpenLoginModal(true)
     }
-  }, []);
+  }, [])
 
   return (
     <HeaderContainer>
@@ -54,5 +50,5 @@ export function Header() {
         </>
       )}
     </HeaderContainer>
-  );
+  )
 }

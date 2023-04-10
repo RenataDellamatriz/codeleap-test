@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import * as Dialog from "@radix-ui/react-dialog";
+import styled from 'styled-components'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const PostContainer = styled.div`
   width: 100%;
   margin-top: 1.5rem;
-`;
+`
 
 export const PostHeader = styled.div`
   display: flex;
@@ -13,10 +13,10 @@ export const PostHeader = styled.div`
   background-color: ${(props) => props.theme.blue};
   padding: 1.5rem;
   border-radius: 16px 16px 0 0;
-`;
+`
 
 export const PostContent = styled.section`
-  border: solid 1px ${(props) => props.theme["border-sections"]};
+  border: solid 1px ${(props) => props.theme['border-sections']};
   border-radius: 0 0 16px 16px;
   padding: 24px;
 
@@ -28,7 +28,7 @@ export const PostContent = styled.section`
   span {
     font-size: 1.125rem;
     font-weight: 700;
-    color: ${(props) => props.theme["base-span"]};
+    color: ${(props) => props.theme['base-span']};
     :nth-child(2) {
       font-weight: 400;
     }
@@ -39,7 +39,7 @@ export const PostContent = styled.section`
     font-size: 1.125rem;
     overflow-wrap: break-word;
   }
-`;
+`
 
 export const PostTitle = styled.h3`
   font-weight: 700;
@@ -47,14 +47,14 @@ export const PostTitle = styled.h3`
   color: ${(props) => props.theme.white};
   inline-size: 70%;
   overflow-wrap: break-word;
-`;
+`
 
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
-`;
+`
 export const DialogTrigger = styled(Dialog.Trigger)`
   display: flex;
   justify-content: center;
@@ -68,12 +68,12 @@ export const DialogTrigger = styled(Dialog.Trigger)`
     font-size: 1.375rem;
     color: ${(props) => props.theme.white};
   }
-`;
+`
 
 export const PostAuthor = styled.span`
   text-transform: capitalize;
   inline-size: 70%;
   overflow-wrap: break-word;
-`;
+`
 
-export const PostDate = styled.span``;
+export const PostDate = styled.span``

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import * as Dialog from "@radix-ui/react-dialog";
+import styled from 'styled-components'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const HeaderContainer = styled.header`
   background-color: ${(props) => props.theme.blue};
@@ -7,12 +7,12 @@ export const HeaderContainer = styled.header`
 
   display: flex;
   justify-content: space-between;
-`;
+`
 export const Title = styled.h1`
   font-weight: 700;
   font-size: 1.375rem;
   color: ${(props) => props.theme.white};
-`;
+`
 
 export const TriggerWrapper = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ export const TriggerWrapper = styled.div`
     color: ${(props) => props.theme.white};
     text-transform: capitalize;
   }
-`;
+`
 
 export const DialogTrigger = styled(Dialog.Trigger)`
   display: flex;
@@ -42,4 +42,4 @@ export const DialogTrigger = styled(Dialog.Trigger)`
   svg {
     font-size: 1.375rem;
   }
-`;
+`

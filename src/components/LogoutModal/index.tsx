@@ -1,20 +1,18 @@
-import * as Dialog from "@radix-ui/react-dialog";
+import * as Dialog from '@radix-ui/react-dialog'
 import {
   ButtonWrapper,
   DialogContent,
   DialogOverlay,
   DialogTitle,
-} from "./styles";
-import { useDispatch } from "react-redux";
-import { setUsername } from "../../store/slices/user";
-
+} from './styles'
+import { useDispatch } from 'react-redux'
+import { setUsername } from '../../store/slices/user'
 
 export function LogoutModal({ onCloseModal }: { onCloseModal: () => void }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   function handleLogout() {
-    dispatch(setUsername({ user: "" })) && 
-    onCloseModal()    
+    dispatch(setUsername({ user: '' })) && onCloseModal()
   }
 
   return (
@@ -29,5 +27,5 @@ export function LogoutModal({ onCloseModal }: { onCloseModal: () => void }) {
         </ButtonWrapper>
       </DialogContent>
     </Dialog.Portal>
-  );
+  )
 }

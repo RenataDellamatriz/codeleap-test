@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import * as Dialog from "@radix-ui/react-dialog";
+import styled from 'styled-components'
+import * as Dialog from '@radix-ui/react-dialog'
 
 export const DialogOverlay = styled(Dialog.Overlay)`
   position: fixed;
   width: 100vw;
   height: 100vh;
   inset: 0;
-  background: ${(props) => props.theme["base-background"]};
-`;
+  background: ${(props) => props.theme['base-background']};
+`
 export const DialogContent = styled(Dialog.Content)`
   max-width: 32rem;
-  width:100%;
+  width: 100%;
   border-radius: 6px;
   padding: 24px;
   background: ${(props) => props.theme.white};
@@ -22,7 +22,7 @@ export const DialogContent = styled(Dialog.Content)`
   form {
     input {
       padding: 8px;
-      border: solid 1px ${(props) => props.theme["border-fields"]};
+      border: solid 1px ${(props) => props.theme['border-fields']};
       border-radius: 8px;
     }
     div {
@@ -34,11 +34,11 @@ export const DialogContent = styled(Dialog.Content)`
       }
     }
     span {
-    margin-top: 6px;
-    color: ${props => props.theme['base-delete']}
+      margin-top: 6px;
+      color: ${(props) => props.theme['base-delete']};
+    }
   }
-  }
-`;
+`
 export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -58,8 +58,8 @@ export const ButtonWrapper = styled.div`
     cursor: pointer;
     transition: 0.4s;
 
-    :disabled{
-      background-color: ${props => props.theme["base-placeholder"]};
+    :disabled {
+      background-color: ${(props) => props.theme['base-placeholder']};
     }
   }
-`;
+`

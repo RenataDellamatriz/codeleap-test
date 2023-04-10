@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const LayoutContainer = styled.div`
   margin: 0 auto;
@@ -6,4 +6,4 @@ export const LayoutContainer = styled.div`
   max-width: 800px;
   min-height: 100vh;
   background-color: ${(props) => props.theme.white};
-`;
+`
