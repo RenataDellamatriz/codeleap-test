@@ -49,7 +49,9 @@ export const FormButton = styled.button`
   width: 7.5rem;
   padding: 0.4rem;
   cursor: pointer;
+  transition: 0.4s;
   :disabled {
     cursor: not-allowed;
+    background-color: ${props => props.theme["base-placeholder"]};
   }
 `;

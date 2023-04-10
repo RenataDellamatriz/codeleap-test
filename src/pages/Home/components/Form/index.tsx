@@ -14,9 +14,8 @@ import { createPost } from "../../../../store/slices/posts";
 import { useAppDispatch } from "../../../../hooks/useAppDispatch";
 
 const postSchema = z.object({
-  title: z.string(),
-  content: z.string(),   
- 
+  title: z.string().min(1),
+  content: z.string().min(1).max(144),    
 });
 
 type postFormSchema = z.infer<typeof postSchema>;
@@ -25,7 +24,7 @@ export function Form() {
   const { user } = useSelector(selectedUser);
   const dispatch = useAppDispatch();
 
-  const { handleSubmit, register, reset } = useForm<postFormSchema>({
+  const { handleSubmit, register, reset, formState } = useForm<postFormSchema>({
     resolver: zodResolver(postSchema),
   });
 
@@ -35,6 +34,8 @@ export function Form() {
    const newPost = {title: title, content: content, username: user}
     await dispatch(createPost(newPost)) && reset()   
   }
+
+  
 
   return (
     <FormContainer onSubmit={handleSubmit(onPostSubmit)}>
@@ -50,7 +51,7 @@ export function Form() {
       </FieldsWrapper>
 
       <FormButtonWrapper>
-        <FormButton type="submit" disabled={!user}>
+        <FormButton type="submit" disabled={!user || !formState.isValid}>
           Create
         </FormButton>
       </FormButtonWrapper>

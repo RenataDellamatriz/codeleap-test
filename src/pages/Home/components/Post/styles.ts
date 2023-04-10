@@ -37,6 +37,7 @@ export const PostContent = styled.section`
   p {
     margin-top: 16px;
     font-size: 1.125rem;
+    overflow-wrap: break-word;
   }
 `;
 
@@ -48,13 +49,12 @@ export const PostTitle = styled.h3`
   overflow-wrap: break-word;
 `;
 
-
 export const ButtonWrapper = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 20px;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
 export const DialogTrigger = styled(Dialog.Trigger)`
   display: flex;
   justify-content: center;
@@ -71,7 +71,9 @@ export const DialogTrigger = styled(Dialog.Trigger)`
 `;
 
 export const PostAuthor = styled.span`
-text-transform: capitalize;
+  text-transform: capitalize;
+  inline-size: 70%;
+  overflow-wrap: break-word;
 `;
 
 export const PostDate = styled.span``;

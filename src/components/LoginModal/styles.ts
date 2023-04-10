@@ -52,5 +52,10 @@ export const ButtonWrapper = styled.div`
     text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
+    transition: 0.4s;
+
+    :disabled{
+      background-color: ${props => props.theme["base-placeholder"]};
+    }
   }
 `;

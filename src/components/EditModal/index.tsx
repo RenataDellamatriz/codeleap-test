@@ -9,9 +9,12 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { PostProps, updatePost } from "../../store/slices/posts";
-import { useSelector } from "react-redux";
-import { postApi } from "../../services/postApi";
+import { updatePost } from "../../store/slices/posts";
+
+interface EditModalProps {
+  id: number;
+  onCloseModal: () => void;
+}
 
 const editPostSchema = z.object({
   title: z.string(),
@@ -19,11 +22,6 @@ const editPostSchema = z.object({
 });
 
 type editPostFormSchema = z.infer<typeof editPostSchema>;
-
-interface EditModalProps {
-  id: number;
-  onCloseModal: () => void;
-}
 
 export function EditModal(
   {id, onCloseModal} : EditModalProps
